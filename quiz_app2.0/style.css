@@ -99,7 +99,34 @@ body {
     margin-top: 20px;
 }
 
-.answer-container {
+.answer-container-A {
+    display: flex;
+    padding-left: 30px;
+    align-items: center;
+    margin-top: 40px;
+    height: 75px;
+    background-color: white;
+    width: 500px;
+}
+.answer-container-B {
+    display: flex;
+    padding-left: 30px;
+    align-items: center;
+    margin-top: 40px;
+    height: 75px;
+    background-color: white;
+    width: 500px;
+}
+.answer-container-C {
+    display: flex;
+    padding-left: 30px;
+    align-items: center;
+    margin-top: 40px;
+    height: 75px;
+    background-color: white;
+    width: 500px;
+}
+.answer-container-D {
     display: flex;
     padding-left: 30px;
     align-items: center;
@@ -109,7 +136,7 @@ body {
     width: 500px;
 }
 
-.answer-container button {
+.question-text button {
     margin-right: 60px;
     height: 60px;
     width: 60px;
