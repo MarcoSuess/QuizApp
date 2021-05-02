@@ -81,8 +81,10 @@ let questNumber = 0;
 let currentQuiz;
 let score = 0;
 let progress = 0;
+let currentQuiz_length;
 
 function OpenNewQuiz(id) {
+
 
     document.getElementById('container-question').innerHTML = `
     <img src="img/brainbg.jpg">
@@ -101,16 +103,21 @@ function OpenNewQuiz(id) {
 
 }
 
+
 function StartNow(id) {
-    currentQuiz = quiz[id];
-    update()
+    document.getElementById('progress-bar').style = `width: 0%`;
+    questNumber = 0;
+    score = 0;
+    progress = 0;
+    currentQuiz = quiz[id]
+    update(id)
 }
 
 
-function update() {
+function update(id) {
 
     let currentQuestion = currentQuiz['questions'][questNumber];
-    document.getElementById('progress-bar').style = `width: ${progress}%`;
+
 
     document.getElementById('container-question').innerHTML = `
 
@@ -125,7 +132,7 @@ function update() {
         
             <div class="button-game">
                 <button  id="previousQuestion" onclick="previousQuestion()"> &#171; </button>
-                <button id="nextQuestion" class="d-none" onclick="nextQuestion()">&#187; </button>
+                <button id="nextQuestion" class="d-none" onclick="nextQuestion(${id})">&#187; </button>
             </div>
 
         </div>
@@ -152,7 +159,10 @@ function showAnswerContainer(currentQuestion) {
 
 
 function checkAnswer(i) {
-    document.getElementById('test' + i).disabled = true;
+    for (let j = 0; j < 4; j++) {
+        document.getElementById('test' + j).disabled = true;
+    }
+
     let answer = currentQuiz['questions'][questNumber]['right-answer']
     console.log(i)
 
@@ -172,14 +182,21 @@ function checkAnswer(i) {
 
 }
 
-function nextQuestion() {
+function nextQuestion(id) {
     questNumber++
     calculateProgress()
-    update()
+    if (questNumber == currentQuiz['questions'].length) {
+        finalScreen(id)
+    } else {
+        update(id)
+    }
 }
+
+
 
 function previousQuestion() {
     questNumber--;
+    calculateProgress()
 
     if (questNumber < 0) {
         questNumber = 0;
@@ -188,6 +205,34 @@ function previousQuestion() {
 }
 
 function calculateProgress() {
-    quiz_length = currentQuiz['questions'].length;
-    progress = ((100 / quiz_length) * questNumber);
+    currentQuiz_length = currentQuiz['questions'].length;
+    progress = ((100 / currentQuiz_length) * questNumber);
+    document.getElementById('progress-bar').style = `width: ${progress}%`;
+}
+function finalScreen(id) {
+
+
+    document.getElementById('container-question').innerHTML = `
+<div class="finishScreen">
+
+    <div class="complete-logo">
+        <img src="img/brain result.png">
+        <h1> <b> COMPLETE <br> ${currentQuiz['name']} </b></h1>
+    </div>
+
+     <h2><b class="score">YOUR SCORE</b> <b>${score}/${currentQuiz_length}</b></h2>
+    <div class="share">
+        <button class="btn btn-primary">SHARE</button>
+    </div>
+
+    <h3 class="replayBtn" onclick="replay(${id})">REPLAY</h3>
+
+</div>
+<img class="trophy" src="img/tropy.png">
+    
+    `
+}
+
+function replay(id) {
+    StartNow(id)
 }

@@ -100,7 +100,6 @@ body {
 
 .question-text h2 {
     text-align: center;
-    
 }
 
 .answer-container {
@@ -112,7 +111,6 @@ body {
     background-color: white;
     width: 500px;
 }
-
 
 .question-text button {
     margin-right: 60px;
@@ -146,8 +144,9 @@ body {
 }
 
 .wrong-answer {
-background-color: #ff5d5d;
+    background-color: #ff5d5d;
 }
+
 .wrong-answer button {
     background-color: #ff5d5d;
 }
@@ -155,12 +154,60 @@ background-color: #ff5d5d;
 .right-answer {
     background-color: #69ff19;
 }
+
 .right-answer button {
     background-color: #69ff19;
 }
+
 .progress {
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
+}
+
+.complete-logo img {
+    height: 180px;
+    width: 180px;
+}
+
+.complete-logo {
+    text-align: center;
+}
+
+.finishScreen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.finishScreen h2 {
+    margin-top: 50px;
+}
+
+.score {
+    color: #ff8111;
+    margin-right: 30px;
+}
+
+.share {
+    margin-top: 40px;
+}
+
+.share button {
+    width: 200px;
+}
+
+.replayBtn {
+    color: #0063ff;
+    margin-top: 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.trophy {
+ width: 177px;
+ height: 357px;   
 }
