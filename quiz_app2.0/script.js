@@ -4,6 +4,10 @@ let currentQuiz;
 let score = 0;
 let progress = 0;
 let currentQuiz_length;
+let AUDIO_MAINSOUND = new Audio('sound/main_sound.mp3')
+let AUDIO_RIGHTANSWER = new Audio('sound/right_answer.mp3')
+let AUDIO_WRONGANSWER = new Audio('sound/wrong_answer.mp3')
+let AUDIO_FINAL = new Audio('sound/final_sound.mp3')
 
 function OpenNewQuiz(id) {
 
@@ -25,21 +29,19 @@ function OpenNewQuiz(id) {
 
 }
 
-
 function StartNow(id) {
     document.getElementById('progress-bar').style = `width: 0%`;
     questNumber = 0;
     score = 0;
     progress = 0;
     currentQuiz = quiz[id]
+    AUDIO_MAINSOUND.play();
     update(id)
 }
-
 
 function update(id) {
 
     let currentQuestion = currentQuiz['questions'][questNumber];
-
 
     document.getElementById('container-question').innerHTML = `
 
@@ -47,13 +49,13 @@ function update(id) {
 
         <div  class="question-text">
             <h2>
-                ${currentQuestion['question_' + questNumber]}
+                ${currentQuestion['question_' + questNumber]}?
             </h2>
 
       ${showAnswerContainer(currentQuestion)}
         
             <div class="button-game">
-                <button  id="previousQuestion" onclick="previousQuestion()"> &#171; </button>
+                
                 <button id="nextQuestion" class="d-none" onclick="nextQuestion(${id})">&#187; </button>
             </div>
 
@@ -79,7 +81,6 @@ function showAnswerContainer(currentQuestion) {
     return answerRow
 }
 
-
 function checkAnswer(i) {
     for (let j = 0; j < 4; j++) {
         document.getElementById('test' + j).disabled = true;
@@ -91,20 +92,26 @@ function checkAnswer(i) {
     if (answer == i) {
         //right answer
         score++;
-        document.getElementById(i).classList.add('right-answer')
+        AUDIO_MAINSOUND.pause();
+        AUDIO_RIGHTANSWER.play();
+        document.getElementById(answer).classList.add('right-answer')
         document.getElementById('nextQuestion').classList.remove('d-none')
 
     } else {
         //wrong answer
+        AUDIO_MAINSOUND.pause();
+        AUDIO_WRONGANSWER.play();
+        document.getElementById(answer).classList.add('right-answer')
         document.getElementById(i).classList.add('wrong-answer')
         document.getElementById('nextQuestion').classList.remove('d-none')
 
     }
 
-
 }
 
 function nextQuestion(id) {
+    AUDIO_MAINSOUND.currentTime = 0;
+    AUDIO_MAINSOUND.play();
     questNumber++
     calculateProgress()
     if (questNumber == currentQuiz['questions'].length) {
@@ -114,25 +121,14 @@ function nextQuestion(id) {
     }
 }
 
-
-
-function previousQuestion() {
-    questNumber--;
-    calculateProgress()
-
-    if (questNumber < 0) {
-        questNumber = 0;
-    }
-    update();
-}
-
 function calculateProgress() {
     currentQuiz_length = currentQuiz['questions'].length;
     progress = ((100 / currentQuiz_length) * questNumber);
     document.getElementById('progress-bar').style = `width: ${progress}%`;
 }
 function finalScreen(id) {
-
+    AUDIO_MAINSOUND.pause();
+    AUDIO_FINAL.play();
 
     document.getElementById('container-question').innerHTML = `
 <div class="finishScreen">

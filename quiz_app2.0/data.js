@@ -4,7 +4,7 @@ let quiz = [
         'questions': [{
             'question_0': 'Wer hat HTML erfunden',
             'answer': ['Robbie Williams', 'Lady Gaga', 'Tim Berners - Lee', 'Justin Bieber'],
-            'right-answer': 2,
+            'right-answer': 0,
         },
         {
             'question_1': 'test',
