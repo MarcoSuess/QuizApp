@@ -65,7 +65,7 @@ function update(id) {
 }
 
 function showAnswerContainer(currentQuestion) {
-    let answerRow = `<div>`
+    let answerRow = `<div class="answerRow">`
 
     for (let i = 0; i < currentQuestion['answer'].length; i++) {
         const answer = currentQuestion['answer'][i];
@@ -92,15 +92,15 @@ function checkAnswer(i) {
     if (answer == i) {
         //right answer
         score++;
-        AUDIO_MAINSOUND.pause();
         AUDIO_RIGHTANSWER.play();
+        AUDIO_MAINSOUND.pause();
         document.getElementById(answer).classList.add('right-answer')
         document.getElementById('nextQuestion').classList.remove('d-none')
 
     } else {
         //wrong answer
-        AUDIO_MAINSOUND.pause();
         AUDIO_WRONGANSWER.play();
+        AUDIO_MAINSOUND.pause();
         document.getElementById(answer).classList.add('right-answer')
         document.getElementById(i).classList.add('wrong-answer')
         document.getElementById('nextQuestion').classList.remove('d-none')
@@ -110,11 +110,13 @@ function checkAnswer(i) {
 }
 
 function nextQuestion(id) {
-    AUDIO_MAINSOUND.currentTime = 0;
     AUDIO_MAINSOUND.play();
+    AUDIO_MAINSOUND.currentTime = 0;
+
     questNumber++
     calculateProgress()
     if (questNumber == currentQuiz['questions'].length) {
+        AUDIO_MAINSOUND.pause();
         finalScreen(id)
     } else {
         update(id)
@@ -127,7 +129,7 @@ function calculateProgress() {
     document.getElementById('progress-bar').style = `width: ${progress}%`;
 }
 function finalScreen(id) {
-    AUDIO_MAINSOUND.pause();
+
     AUDIO_FINAL.play();
 
     document.getElementById('container-question').innerHTML = `
@@ -153,4 +155,11 @@ function finalScreen(id) {
 
 function replay(id) {
     StartNow(id)
+}
+
+function responsiveBurger() {
+    document.getElementById('navBarOpen').classList.add('translateX');
+}
+function responsiveBurgerClose() {
+    document.getElementById('navBarOpen').classList.remove('translateX');
 }

@@ -32,6 +32,22 @@
                 <img src="img/logo.png">
 
             </div>
+
+            <div class="responsive-nav">
+                <img onclick="responsiveBurger()" src="img/header-bar.png">
+            </div>
+
+            <div  id="navBarOpen" class="responsive-nav_menu">
+                <img onclick="responsiveBurgerClose()" class="navBarClose" src="img/close.png">
+                <h1> <b>Choose Your Quiz </b></h1>
+                <a onclick="OpenNewQuiz(0);responsiveBurgerClose()" href="#">HTML</a>
+                <a onclick="OpenNewQuiz(1);responsiveBurgerClose()" href="#">CSS</a>
+                <a onclick="OpenNewQuiz(2);responsiveBurgerClose()" href="#">JS</a>
+                <a onclick="OpenNewQuiz(3);responsiveBurgerClose()" href="#">JAVA</a>
+            </div>
+
+
+
             <div class="nav">
                 <a onclick="OpenNewQuiz(0)" href="#">HTML</a>
                 <a onclick="OpenNewQuiz(1)" href="#">CSS</a>
@@ -55,7 +71,7 @@
         </div>
 
     </div>
-   
+
 </body>
 
 </html>
